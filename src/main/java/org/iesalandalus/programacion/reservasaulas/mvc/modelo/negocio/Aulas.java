@@ -1,5 +1,9 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
@@ -7,39 +11,39 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 public class Aulas {
 	private int capacidad, tamano;
 	
-	Aula[] coleccionAulas;
+	List<Aula> coleccionAulas;
 	
 	public Aulas (int capacidadColeccionAulas) {
 		if (capacidadColeccionAulas <= 0)
 			throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
 		
 		// Creamos el array con la capacidad introducida
-		coleccionAulas = new Aula[capacidadColeccionAulas];
+		coleccionAulas = new ArrayList<Aula>(capacidadColeccionAulas);
 		
 		// Actualizamos los atributos capacidad y tamaño
 		capacidad = capacidadColeccionAulas;
 		tamano = 0;
 	}
 	
-	public Aula[] get() {
+	public List<Aula> getAulas() {
 		if (tamano == 0)
 			throw new IllegalArgumentException("ERROR: La lista de reservas está vacia.");
 		
 		return copiaProfundaAulas(coleccionAulas);
 	}
 	
-	private Aula[] copiaProfundaAulas(Aula[] coleccionAulasOriginal) {
+	private List<Aula> copiaProfundaAulas(List<Aula> coleccionAulasOriginal) {
 		
-		Aula[] coleccionCopiaAulas;
+		List<Aula> coleccionCopiaAulas;
 		
-		coleccionCopiaAulas = new Aula[getTamano()];
+		coleccionCopiaAulas = new ArrayList<Aula>(getTamano());
 		
-		// recorremos todas las citas comparando
-		for (int i = 0; i < coleccionAulasOriginal.length && coleccionAulasOriginal[i] != null; i++) {
-			Aula aulaCopia = new Aula(coleccionAulasOriginal[i]);
-			coleccionCopiaAulas[i] = aulaCopia;
+		// recorremos todas las aulas comparando
+		Iterator<Aula> it = coleccionAulasOriginal.iterator();
+		while(it.hasNext()) {
+			Aula aulaCopia = new Aula(it.next());
+			coleccionCopiaAulas.add(aulaCopia);
 		}
-		
 		return coleccionCopiaAulas;
 		
 	}
@@ -72,7 +76,7 @@ public class Aulas {
 		boolean aulaEncontrada = false;
 		while (!tamanoSuperado(indice) && !aulaEncontrada) {
 			
-			if (coleccionAulas[indice].equals(aula))// en caso de que el objeto del array que estamos consultado sea la cita introducida
+			if (coleccionAulas.get(indice).equals(aula))// en caso de que el objeto del array que estamos consultado sea la cita introducida
 				aulaEncontrada = true;
 			else
 				indice++;
@@ -98,7 +102,7 @@ public class Aulas {
 			throw new IllegalArgumentException("ERROR: No se pueden insertar mas aulas.");
 		
 		// insertamos la nueva cita y actualizamos el tamaño
-		coleccionAulas[indice] = new Aula(aula);
+		coleccionAulas.add(new Aula(aula));
 		tamano++;
 	}
 	
@@ -110,14 +114,14 @@ public class Aulas {
 		
 		// si el indice supera al tamaño, es que no lo ha encontrado y es un objeto nuevo
 		if (!tamanoSuperado(indice))
-			return new Aula(coleccionAulas[indice]); 
+			return new Aula(coleccionAulas.get(indice)); 
 		else
 			return null;
 	}
 	
 	private void desplazarUnaPosicionHaciaIzquierda (int indice) {
 		for (int i = indice; !tamanoSuperado(i); i++) { // recorrer todos los objetos hacia la derecha a partir del indice hasta legar al final
-			coleccionAulas[i] = coleccionAulas[i+1]; // asignamos en cada posicion el objeto siguiente
+			coleccionAulas.add(coleccionAulas.get(i+1)); // asignamos en cada posicion el objeto siguiente
 		}
 	}
 	
@@ -136,16 +140,14 @@ public class Aulas {
 		}
 	}
 	
-	public String[] representar() {
+	public List<String> representar() {
 		if (tamano == 0)
 			throw new IllegalArgumentException("ERROR: La lista de reservas está vacia.");
 		
-		String[] representacion = new String[tamano];
+		List<String> representacion = new ArrayList<String>(tamano);
 		
-		for (int i = 0; !tamanoSuperado(i); i++) {
-			representacion[i] = coleccionAulas[i].toString();
-		}
-		
+		Iterator<Aula> it = coleccionAulas.iterator();
+			representacion.add(it.next().toString());		
 	
 		return representacion;
 	}
