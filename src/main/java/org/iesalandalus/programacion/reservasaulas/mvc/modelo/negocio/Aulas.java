@@ -119,12 +119,6 @@ public class Aulas {
 			return null;
 	}
 	
-	private void desplazarUnaPosicionHaciaIzquierda (int indice) {
-		for (int i = indice; !tamanoSuperado(i); i++) { // recorrer todos los objetos hacia la derecha a partir del indice hasta legar al final
-			coleccionAulas.add(coleccionAulas.get(i+1)); // asignamos en cada posicion el objeto siguiente
-		}
-	}
-	
 	public void borrar (Aula aula) throws OperationNotSupportedException {
 		if (aula == null) 
 			throw new NullPointerException("ERROR: No se puede borrar un aula nula.");
@@ -132,7 +126,7 @@ public class Aulas {
 		int indice = buscarIndice(aula);
 		
 		if (tamanoSuperado(indice)) {
-			desplazarUnaPosicionHaciaIzquierda(indice);
+			coleccionAulas.remove(indice);
 		
 			tamano--;
 		}else {
