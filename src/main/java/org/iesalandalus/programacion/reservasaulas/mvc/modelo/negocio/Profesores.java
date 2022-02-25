@@ -8,6 +8,7 @@ import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public class Profesores {
 	
@@ -84,10 +85,10 @@ public class Profesores {
 		if (getNumProfesores() == 0)
 			throw new IllegalArgumentException("ERROR: La lista de profesores está vacia.");
 		
-		List<String> representacion = new ArrayList<String>(getNumProfesores());
+		List<String> representacion = new ArrayList<String>();
 		
-		Iterator<Profesor> it = coleccionProfesores.iterator();
-			representacion.add(it.next().toString());		
+		for (Profesor p : coleccionProfesores)
+			representacion.add(p.toString());	
 	
 		return representacion;
 	}

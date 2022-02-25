@@ -86,10 +86,10 @@ public class Reservas {
 		if (getNumReservas() == 0)
 			throw new IllegalArgumentException("ERROR: La lista de reservas está vacia.");
 		
-		List<String> representacion = new ArrayList<String>(getNumReservas());
+		List<String> representacion = new ArrayList<String>();
 		
-		Iterator<Reserva> it = coleccionReservas.iterator();
-			representacion.add(it.next().toString());		
+		for (Reserva r : coleccionReservas)
+			representacion.add(r.toString());
 	
 		return representacion;
 	}

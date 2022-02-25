@@ -7,6 +7,7 @@ import java.util.List;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 
 public class Aulas {
 	
@@ -85,8 +86,8 @@ public class Aulas {
 		
 		List<String> representacion = new ArrayList<String>(getNumAulas());
 		
-		Iterator<Aula> it = coleccionAulas.iterator();
-			representacion.add(it.next().toString());		
+		for (Aula a : coleccionAulas)
+			representacion.add(a.toString());			
 	
 		return representacion;
 	}
