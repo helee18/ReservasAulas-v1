@@ -96,7 +96,7 @@ public enum Opcion {
 	public abstract void ejecutar();
 	
 	protected static void setVista(Vista vistaIntoducida) {
-		if (vista == null) 
+		if (vistaIntoducida == null) 
 			throw new NullPointerException("ERROR: La vista no pueda ser nula.");
 		
 		Opcion.vista = vistaIntoducida;
