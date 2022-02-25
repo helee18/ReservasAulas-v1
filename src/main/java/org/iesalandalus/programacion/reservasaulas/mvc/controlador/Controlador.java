@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.controlador;
 
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.Modelo;
@@ -101,15 +103,15 @@ public class Controlador {
 		return modelo.buscarProfesor(profesor);
 	}
 	
-	public String[] representarAulas() {
+	public List<String> representarAulas() {
 		return modelo.representarAulas();
 	}
 	
-	public String[] representarProfesores() {
+	public List<String> representarProfesores() {
 		return modelo.representarProfesores();
 	}
 	
-	public String[] representarReservas() {
+	public List<String> representarReservas() {
 		return modelo.representarReservas();
 	}
 	
@@ -135,7 +137,7 @@ public class Controlador {
 		}
 	}
 	
-	public Reserva[] getReservasAula(Aula aula) {
+	public List<Reserva> getReservasAula(Aula aula) {
 		if (aula == null)
 			throw new NullPointerException("ERROR: No se puede buscar un aula nula.");
 		
@@ -143,7 +145,7 @@ public class Controlador {
 		
 	}
 	
-	public Reserva[] getReservasProfesor(Profesor profesor) {
+	public List<Reserva> getReservasProfesor(Profesor profesor) {
 		if (profesor == null)
 			throw new NullPointerException("ERROR: No se puede buscar un profesor nulo.");
 		
@@ -151,7 +153,7 @@ public class Controlador {
 		
 	}
 	
-	public Reserva[] getReservasPremanencia(Permanencia permanencia) {
+	public List<Reserva> getReservasPremanencia(Permanencia permanencia) {
 		if (permanencia == null)
 			throw new NullPointerException("ERROR: No se puede buscar una permanencia nula.");
 		
