@@ -11,7 +11,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 
 public class Aulas {
 	
-	List<Aula> coleccionAulas;
+	private List<Aula> coleccionAulas;
 	
 	public Aulas () {
 		coleccionAulas = new ArrayList<Aula>();

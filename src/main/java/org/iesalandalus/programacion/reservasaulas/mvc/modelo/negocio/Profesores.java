@@ -12,7 +12,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public class Profesores {
 	
-	List<Profesor> coleccionProfesores;
+	private List<Profesor> coleccionProfesores;
 	
 	public Profesores () {
 		coleccionProfesores = new ArrayList<Profesor>();

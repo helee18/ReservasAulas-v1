@@ -13,7 +13,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public class Reservas {
 
-	List<Reserva> coleccionReservas;
+	private List<Reserva> coleccionReservas;
 	
 	public Reservas () {
 		coleccionReservas = new ArrayList<Reserva>();
@@ -88,8 +88,11 @@ public class Reservas {
 		
 		List<String> representacion = new ArrayList<String>();
 		
-		for (Reserva r : coleccionReservas)
-			representacion.add(r.toString());
+		Iterator<Reserva> it = coleccionReservas.iterator();
+		while(it.hasNext()) {
+			Reserva reservaCopia = new Reserva(it.next());
+			representacion.add(reservaCopia.toString());
+		}
 	
 		return representacion;
 	}
@@ -106,10 +109,11 @@ public class Reservas {
 		
 		coleccionReservasProfesor = new ArrayList<Reserva>(getNumReservas());
 		
-		for (Reserva i: coleccionReservas) {
-			Reserva reserva = new Reserva(i);
+		Iterator<Reserva> it = coleccionReservas.iterator();
+		while(it.hasNext()) {
+			Reserva reserva = new Reserva(it.next());
 			
-			if (profesor.equals(i.getProfesor())) {
+			if (profesor.equals(reserva.getProfesor())) {
 				coleccionReservasProfesor.add(reserva);
 			}
 		}
@@ -125,10 +129,11 @@ public class Reservas {
 		
 		coleccionReservasAula = new ArrayList<Reserva>(getNumReservas());
 		
-		for (Reserva i: coleccionReservas) {
-			Reserva reserva = new Reserva(i);
+		Iterator<Reserva> it = coleccionReservas.iterator();
+		while(it.hasNext()) {
+			Reserva reserva = new Reserva(it.next());
 			
-			if (aula.equals(i.getAula())) {
+			if (aula.equals(reserva.getAula())) {
 				coleccionReservasAula.add(reserva);
 			}
 		}
@@ -144,10 +149,11 @@ public class Reservas {
 		
 		coleccionReservasPermanencia = new ArrayList<Reserva>(getNumReservas());
 		
-		for (Reserva i: coleccionReservas) {
-			Reserva reserva = new Reserva(i);
+		Iterator<Reserva> it = coleccionReservas.iterator();
+		while(it.hasNext()) {
+			Reserva reserva = new Reserva(it.next());
 			
-			if (permanencia.equals(i.getPermanencia())) {
+			if (permanencia.equals(reserva.getPermanencia())) {
 				coleccionReservasPermanencia.add(reserva);
 			}
 		}
